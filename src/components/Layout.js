@@ -1,18 +1,20 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import {animated, Spring, useSpring} from 'react-spring'
 import Navbar from './Navbar/Navbar'
 import Sidebar from './Sidebar/Sidebar'
 
 
 const Layout = ({children}) => {
+    const [showSidebar, setShowSidebar] = useState(false)
 
-    const navigate = useNavigate()
     return (
         <>
-            <Navbar />
+            <Navbar onClick={() => setShowSidebar(!showSidebar)}/>
+            {showSidebar && 
+                <Sidebar onClick={() => setShowSidebar(!showSidebar)} />
+            }
             <div className='d-flex'>
-                <Sidebar />
-                <div className='wrapper-content w-100 '>
+                <div className='wrapper-content w-100'>
                     {children}
                 </div>
             </div>

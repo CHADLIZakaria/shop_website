@@ -4,13 +4,13 @@ import {MdCategory} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {FaRegComments} from 'react-icons/fa'
 import {BiBox} from 'react-icons/bi'
+import {animated, Spring, useSpring} from 'react-spring'
 import { MdOutlineCategory } from "react-icons/md"
 import {AiOutlineMenu} from 'react-icons/ai'
 import './Sidebar.scss'
 
-const Sidebar = () => {
+const Sidebar = ({onClick}) => {
     const navigate = useNavigate()
-    const [showMenu, setShowMenu] = useState(true)
     const siderBarData = [
         {
             'title': 'Categories',
@@ -35,21 +35,24 @@ const Sidebar = () => {
     ]
 
     return (
+        <animated.div 
+            className='wrapper-sidebar'
+            onClick={onClick}
+            style={useSpring({
+                from: {marginLeft: -250},
+                to: {marginLeft: 0}
+        })}>
         <ul className='nav flex-column sidebar'>
-            {siderBarData.map(sideBarElement => (
-                <li className='nav-item' onClick={() => navigate(sideBarElement.path)}>
+            {siderBarData.map((sideBarElement, index) => (
+                <li className='nav-item' key={index} onClick={() => navigate(sideBarElement.path)}>
                     <a className='nav-link active'>
                         {sideBarElement.icon}
-                        {showMenu && 
-                            sideBarElement.title
-                        }
+                        {sideBarElement.title}
                     </a>
                 </li>
-            ))}           
-            <span className='menu' onClick={() => setShowMenu(!showMenu)}>
-                <AiOutlineMenu />
-            </span>
+            ))}        
         </ul>
+        </animated.div>
     )
 }
 

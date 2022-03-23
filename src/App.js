@@ -7,6 +7,8 @@ import ListProducts from './components/ListProducts';
 import Categories from './pages/categories/categories';
 import Comments from './pages/comments/comments';
 import Home from './pages/Home/Home';
+import FormProduct from './pages/products/FormProduct';
+import Product from './pages/products/Product';
 import Products from './pages/products/products';
 import Users from './pages/users/users';
 
@@ -19,12 +21,16 @@ function App() {
             <Route path="/"  exact element={<Home />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/category/:id/edit" element={<FormCategory />} />
+            <Route path="/category/save" element={<FormCategory />} />
+           
             <Route path="categories/:name" element={<ListProducts />} key={window.location.pathname} />
             <Route path="/users" element={<Users />} />
             <Route path="/comments" element={<Comments />} />
             <Route path="/products" element={<Products />} />
-
-          
+            
+            <Route path="/product/:id" element={<Product />} />
+            
+            <Route path="/products/save" element={<FormProduct />} />
           </Routes>
         </Layout>
     </Router>

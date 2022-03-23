@@ -1,19 +1,28 @@
+.wrapper-sidebar {
+    position: absolute;
+    width: 100%;
+    background: rgb(255 255 255 / 50%);
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
 .sidebar {
-    background-color: rgba(19,53,114,.80);
+    background-color: #1C658C;
     height: 100vh;
     width: fit-content;
     position: relative;
     li {
-        padding: 10px 5px;
+        padding: 10px 0px;
         a {
-            border: 1px solid white;
             display: flex;
             gap: 5px;
             align-items: center;
             cursor: pointer;
-            border-radius: 10px;
             color: #fff;
-            background: rgba(255,255,255,.1);
+            &:hover {
+                background: rgba(255,255,255,.1);
+                color: #fff;
+            }
         }
     }
     .menu {

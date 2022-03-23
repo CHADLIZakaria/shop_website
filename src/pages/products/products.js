@@ -2,41 +2,43 @@ import React, { useEffect, useState } from 'react'
 import CategoryService from '../../service/CategoryService'
 import {Link} from 'react-router-dom'
 import Title from '../../components/Title/Title'
+import { BiBox } from 'react-icons/bi'
+import { AiOutlinePlus } from 'react-icons/ai'
+import ProductService from '../../service/ProductService'
+import Table from '../../components/Table/Table'
 
 const Products = () => {
-    const [categories, setCategories] = useState([])
+    const [products, setProducts] = useState([])
+    const [isLoad, setIsLoad] = useState(false)
     useEffect(() => {
-        //CategoryService.findAllCategories().then(data => setCategories(data))
-    }, [])
+        ProductService.findAll().then(data => 
+            {
+                setProducts(data.data.results)
+                console.log(data)
 
-    const deleteCategeory = (id) => {
-        CategoryService.deleteCategoryById(id).then(() => setCategories(categories.filter(category => category.id != id)))
-    }
+            })
+        setIsLoad(true)
+    }, [isLoad])
+
+    // const deleteCategeory = (id) => {
+    //     CategoryService.deleteCategoryById(id).then(() => setCategories(categories.filter(category => category.id != id)))
+    // }
     
     return (
         <div>
-            <Title title={"List of categories"}/>
-            <table className='table table-hover table-striped'>
-                <thead>
-                    <tr>
-                        <th>#ID</th>
-                        <th>Name</th>
-                        <th></th>
-                    </tr>     
-                </thead>
-                <tbody>
-                    {categories.map((category, index) => 
-                        <tr key={index}>
-                            <td>{index+1}</td>
-                            <td>{category.name}</td>
-                            <td className='text-center'>
-                                <Link className='btn btn-primary me-3' to={`/category/${category.id}/edit`}>Update</Link>
-                                <button className='btn btn-danger'  onClick={() => deleteCategeory(category.id)}>Delete</button>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <Title title={"Products"}/>
+            <div className='d-flex justify-content-between align-items-center my-4'>
+                <div className="col-auto">
+                    <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline"/>
+                </div>
+                <Link to="/products/save" className='btn btn-primary d-flex align-items-center'>
+                    Add
+                    <AiOutlinePlus />
+                </Link>
+            </div>
+            {isLoad &&
+                <Table data={products} />
+            }  
         </div>
     )
 }
