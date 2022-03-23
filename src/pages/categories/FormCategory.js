@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import Title from '../Title/Title'
+import Title from '../../components/Title/Title'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import CategoryService from '../../service/CategoryService'
@@ -16,7 +16,7 @@ const FormCategory = () => {
     
     return (
         <>
-            <Title title={"Update Category"} />
+            <Title title={id !== undefined ? "Update Category" : "Save Category"} />
             <Formik 
                 initialValues={{ name: category.name, file: {}}} 
                 enableReinitialize={true}
@@ -55,14 +55,10 @@ const FormCategory = () => {
                                     }}/>
                                 </div>
                             </div>
-                            <button className="btn btn-primary" type="submit">Submit</button>
+                            <button className="btn btn-primary" type="submit">{id !== undefined ? "Update" : "Save"}</button>
                         </Form>
                     )}
             </Formik>
-            {/* <Formik 
-                initialValues={{name: category.name, file: category.file}}
-                render={({value, setFieldVa})}
-            /> */}
         </>
     )
 }

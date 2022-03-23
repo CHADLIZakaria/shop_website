@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import Title from '../../components/Title/Title'
 import Table from '../../components/Table/Table'
 import { AiOutlinePlus } from 'react-icons/ai'
+import DataNotFound from '../../components/DataNotFound/DataNotFound'
 
 const Categories = () => {
     const [categories, setCategories] = useState([])
@@ -35,7 +36,7 @@ const Categories = () => {
                 !isLoading && 
                     categories.length !== 0 ?
                         <Table data={categories} onDelete={deleteCategeory}/> :
-                        <p>No Data Found</p>
+                        <DataNotFound />
                     
             } 
         </div>

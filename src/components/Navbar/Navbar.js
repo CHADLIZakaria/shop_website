@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CategoryService from '../../service/CategoryService'
 import {Link} from 'react-router-dom'
 import { AiOutlineMenu } from 'react-icons/ai'
 import Sidebar from '../Sidebar/Sidebar'
+import { ShopContext } from '../../ApplicationContext'
 
 const Navbar = ({onClick}) => {
 
     const [categories, setCategories] = useState([])
+    const [categories1, setCategories1] = useContext(ShopContext)
     
     useEffect(() => {
         CategoryService.findAllCategories().then(values => setCategories(values))
+        console.log(categories1.categories)
     },[])
     
     return (
