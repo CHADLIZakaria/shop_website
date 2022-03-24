@@ -9,6 +9,14 @@ class CategoryService {
             return console.log(e)
         }
     }
+
+    searchCategories(keyword) {
+        return axios.get(`http://localhost:8080/api/categories/search?name=${keyword}`)
+            .then(value => value.data)
+            .catch(e => console.log(e))
+    }
+
+
     async findCategoryById(id) {
         try {
             const value = await axios.get(`http://localhost:8080/api/categories/${id}`)

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Title from '../../components/Title/Title'
 import ProductService from '../../service/ProductService'
-import donut from './donut.jpg'
 const Home = () => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([])

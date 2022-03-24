@@ -1,31 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CategoryService from '../../service/CategoryService'
 import {Link} from 'react-router-dom'
 import Title from '../../components/Title/Title'
 import Table from '../../components/Table/Table'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai'
 import DataNotFound from '../../components/DataNotFound/DataNotFound'
+import { ShopContext } from '../../ApplicationContext'
+import Progress from '../../components/Progress/Porgress'
+import { Field, Form, Formik } from 'formik'
 
 const Categories = () => {
     const [categories, setCategories] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [navCategories, setNavCategories] = useContext(ShopContext)
+    
+    
     useEffect(() => {
-        CategoryService.findAllCategories().then(data => {
-            setCategories(data)
+        CategoryService.findAllCategories().then(value => {
+            setCategories(value)
+            setNavCategories(value)
             setIsLoading(false)
         })
     }, [isLoading])
 
     const deleteCategeory = (id) => {
-        CategoryService.deleteCategoryById(id).then(() => setCategories(categories.filter(category => category.id != id)))
+        CategoryService.deleteCategoryById(id)
+            .then(() => 
+                setCategories(categories.filter(category => category.id != id)))
+            .then(() => 
+                CategoryService.findAllCategories().then(value => setNavCategories(value))
+            )
     }
     
     return (
         <div>
             <Title title={"Categories"}/>
             <div className='d-flex justify-content-between align-items-center my-4'>
-                <div className="col-auto">
-                    <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline"/>
+                <div class="form-group position-relative">
+                    <Formik 
+                        initialValues={{keyword: ''}}
+                        enableReinitialize={true}
+                        onSubmit={(value) => {
+                            CategoryService.searchCategories(value.keyword).then(value => setCategories(value.data))
+                        }}
+                    >
+                        <Form>
+                            <Field type="text" class="form-control" placeholder="Search" name="keyword" />
+                            <button  type="submit" className='btn position-absolute top-50 end-0  translate-middle-y'>
+                                <AiOutlineSearch  />
+                            </button>
+                        </Form>
+                    </Formik>
                 </div>
                 <Link to="/category/save" className='btn btn-primary d-flex align-items-center'>
                     Add
@@ -33,11 +58,12 @@ const Categories = () => {
                 </Link>
             </div>
             { 
-                !isLoading && 
+                isLoading ?
+                    <Progress />
+                    : 
                     categories.length !== 0 ?
                         <Table data={categories} onDelete={deleteCategeory}/> :
-                        <DataNotFound />
-                    
+                        <DataNotFound />    
             } 
         </div>
     )

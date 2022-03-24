@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { BsInfoCircleFill } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import ProductService from '../../service/ProductService'
-import donut from './donut.jpg'
 import './Product.scss'
 
 const Product = () => {
@@ -13,11 +12,9 @@ const Product = () => {
     useEffect(() => {
         ProductService.findById(id).then(value => {
             setProduct(value.data)
-            console.log(value.data)
         })
     }, [])
     
-
 
   return (
     <div className='row mt-5 product'>

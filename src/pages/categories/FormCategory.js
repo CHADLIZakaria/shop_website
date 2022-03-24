@@ -1,12 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import Title from '../../components/Title/Title'
-import {ErrorMessage, Field, Form, Formik} from 'formik'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import CategoryService from '../../service/CategoryService'
+import {useContext} from 'react'
+import { ShopContext } from '../../ApplicationContext'
 
 const FormCategory = () => {
     const {id} = useParams()
     const [category, setCategory] = useState({name: '', file: {}})
+    const [navCategories, setNavCategories] = useContext(ShopContext)
+    
+    
     const navigate = useNavigate()
     useEffect(() => {
         if(id !== undefined) {
@@ -29,6 +34,7 @@ const FormCategory = () => {
                 }}
                 onSubmit={(values) => {
                     CategoryService.saveCategory(values)
+                    CategoryService.findAllCategories().then(value => setNavCategories(value))
                     navigate('/categories')
                 }}>
                     {({setFieldValue}) => (

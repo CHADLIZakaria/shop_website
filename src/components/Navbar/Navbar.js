@@ -7,12 +7,13 @@ import { ShopContext } from '../../ApplicationContext'
 
 const Navbar = ({onClick}) => {
 
-    const [categories, setCategories] = useState([])
-    const [categories1, setCategories1] = useContext(ShopContext)
+    const [categories, setCategories] = useContext(ShopContext)
     
     useEffect(() => {
-        CategoryService.findAllCategories().then(values => setCategories(values))
-        console.log(categories1.categories)
+        CategoryService.findAllCategories().then(values => {
+            setCategories(values)
+            console.log(values)
+        })
     },[])
     
     return (
@@ -21,7 +22,6 @@ const Navbar = ({onClick}) => {
                 <div className="container-fluid">
                     <span style={{cursor: 'pointer'}}>
                         <AiOutlineMenu onClick={onClick}/>
-
                     </span>
                     <Link className="navbar-brand mx-3" to="/">Sou9</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

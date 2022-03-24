@@ -12,12 +12,13 @@ import Product from './pages/products/Product';
 import Products from './pages/products/products';
 import Users from './pages/users/users';
 import { ShopProvider } from './ApplicationContext';
+import Navbar from './components/Navbar/Navbar';
 
 
 function App() {
   return (
     <Router>
-        <ShopProvider.Provider>
+        <ShopProvider>
           <Layout>
                 <Routes>
                   <Route path="/"  exact element={<Home />} />
@@ -32,7 +33,7 @@ function App() {
                   <Route path="/products/save" element={<FormProduct />} />
                 </Routes>
           </Layout>
-        </ShopProvider.Provider>
+        </ShopProvider>
     </Router>
   );
 }
