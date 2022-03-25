@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CategoryService from '../../service/CategoryService'
-import {Link} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import Title from '../../components/Title/Title'
 import Table from '../../components/Table/Table'
 import { AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai'
@@ -31,6 +31,8 @@ const Categories = () => {
                 CategoryService.findAllCategories().then(value => setNavCategories(value))
             )
     }
+
+
     
     return (
         <div>
@@ -62,7 +64,7 @@ const Categories = () => {
                     <Progress />
                     : 
                     categories.length !== 0 ?
-                        <Table data={categories} onDelete={deleteCategeory}/> :
+                        <Table data={categories} onDelete={deleteCategeory} /> :
                         <DataNotFound />    
             } 
         </div>

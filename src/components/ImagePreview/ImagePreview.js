@@ -5,14 +5,13 @@ const ImagePreview = ({file}) => {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload=() => {
-        // console.log(reader.result)
         setPreview(reader.result)
     }
     return (
         <div>
-           {preview &&
-               <img src={preview} />  
-           } 
+            {preview &&
+                <img src={preview} className="img-thumbnail"/>  
+            } 
         </div>
     )
 }

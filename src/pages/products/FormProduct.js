@@ -6,13 +6,14 @@ import ImagePreview from '../../components/ImagePreview/ImagePreview'
 import Title from '../../components/Title/Title'
 import CategoryService from '../../service/CategoryService'
 import ProductService from '../../service/ProductService'
+import noPhotos from './no-photos.png'
 
 const FormProduct = () => {
     const {id} = useParams()
     const [categories, setCategories] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-       CategoryService.findAllCategories().then(value => setCategories(value))
+        CategoryService.findAllCategories().then(value => setCategories(value))
     }, [])
     
     return (
@@ -21,7 +22,7 @@ const FormProduct = () => {
             <div className='row'>
                 <Formik 
                     initialValues={{ name: '', description: '', price: 0, category: '', 
-                                    file: {}, details: ''}} 
+                                    file: null, details: ''}} 
                     enableReinitialize={true}
                     validate={(values) => {
                         const errors = {}
@@ -79,6 +80,7 @@ const FormProduct = () => {
                                         </div>
                                         <div className='col-6'>
                                             <Field as='select' name='category' className='form-select'>
+                                                <option label="--- Select a category ---" />
                                                 {categories.map(category => 
                                                     <option value={category.id} label={category.name} />  
                                                 )}
@@ -93,7 +95,7 @@ const FormProduct = () => {
                                             <label className='col-form-label'>Image du produit</label>
                                         </div>
                                         <div className='col-6'>
-                                            <input type="file" name="file"  className='form-control' onChange={(e) => {
+                                            <input type="file"  className='form-control' onChange={(e) => {
                                                 setFieldValue('file', e.currentTarget.files[0])
                                             }}/>
                                         </div>
@@ -111,14 +113,15 @@ const FormProduct = () => {
                                             <ErrorMessage component="span" className='text-danger form-text' name='description'/>
                                         </div>
                                     </div>
-                                   
                                     <button className="btn btn-primary" type="submit">Submit</button>
                                 </Form>
                                 <div className='row col-6'>
                                     <div className='col-4 product-image'>
-                                       {Object.keys(values.file).length!==0 ? 
+                                        {values.file ? 
                                             <ImagePreview file={values.file} /> :
-                                            Object.keys(values.file)
+                                            <div>
+                                                <img src={noPhotos} className="img-thumbnail"/>
+                                            </div>
                                         }
                                     </div>
                                     <div className='col-8'>
@@ -145,11 +148,7 @@ const FormProduct = () => {
                             </>  
                         )}
                 </Formik>
-               
             </div>
-
-            
-
         </>
     )
 }

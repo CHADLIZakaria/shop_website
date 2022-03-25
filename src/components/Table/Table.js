@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./Table.scss"
 
 const Table = ({data, onDelete}) => {
+    const navigate = useNavigate()
     return (
             <>
             {data.length !== 0 && 
@@ -29,7 +31,7 @@ const Table = ({data, onDelete}) => {
                                             }
                                         </td>)}
                                 <td>
-                                    <button className='btn btn-primary mr-3'>Update</button>
+                                    <button className='btn btn-primary mr-3' onClick={() => navigate(`/category/${Object.values(ligne)[0]}/edit`)}>Update</button>
                                     <button className='btn btn-danger' onClick={() => onDelete(Object.values(ligne)[0])}>Delete</button>
                                 </td>
                             </tr>

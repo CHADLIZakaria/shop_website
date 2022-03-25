@@ -13,13 +13,13 @@ const Home = () => {
     return (
         <div className='container'>
             <Title title='Sou9' />
-            <div class="row row-cols-1 row-cols-md-3 g-4 card-group">
+            <div class="row row-cols-1 row-cols-md-4 g-4 card-group">
             {products.map(product => 
-                 <div class="col" onClick={() => navigate(`/product/${product.id}`)}>
-                     <div class="card">
+                <div class="col" onClick={() => navigate(`/product/${product.id}`)}>
+                    <div class="card">
                         <img src={`http://localhost:8080/api/uploads/${product.image}`} class="card-img-top" style={{height: '200px'}} alt="..." />
                         <div class="card-body">
-                             <h5 class="d-flex justify-content-between">
+                            <h5 class="d-flex justify-content-between">
                                 <span className='d-flex flex-column'>
                                     <span className='card-title'>{product.title}</span>
                                 </span>
@@ -31,11 +31,10 @@ const Home = () => {
                                 {product.description}
                             </h6>
                         </div>
-                     </div>
-                 </div>
+                    </div>
+                </div>
             )}
             </div>
-           
         </div>
     )
 }

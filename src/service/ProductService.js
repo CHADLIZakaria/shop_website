@@ -23,7 +23,7 @@ class ProductService {
         categoryFormData.append("icon", category.icon)
         formData.append('title', product.name)
         formData.append('description', product.description)
-        formData.append('price', 20)
+        formData.append('price', product.price)
         formData.append('file', product.file)
         formData.append('category.id', category.id)
         formData.append('category.name', category.name)

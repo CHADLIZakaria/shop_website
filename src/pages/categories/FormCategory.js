@@ -61,7 +61,6 @@ const FormCategory = () => {
                                     }}/>
                                 </div>
                             </div>
-                            <ImagePreview file={values.file} />
                             <button className="btn btn-primary" type="submit">{id !== undefined ? "Update" : "Save"}</button>
                         </Form>
                     )}
