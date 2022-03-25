@@ -8,7 +8,6 @@ const Porgress = () => {
             setWidth(0)
             else 
             setWidth(width+25)
-            console.log(width)
         }, 500)
         return () => clearInterval(interval);
     }, [width])

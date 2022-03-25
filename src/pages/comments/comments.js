@@ -27,7 +27,6 @@ const Comments = () => {
     //     CategoryService.deleteCategoryById(id).then(() => setCategories(categories.filter(category => category.id != id)))
     // }
     const onNavigate = (page) => {
-        console.log(page)
         setPaginate({...paginate, page: page})
     }
     

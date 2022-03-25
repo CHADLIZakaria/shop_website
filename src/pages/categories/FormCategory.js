@@ -5,6 +5,7 @@ import Title from '../../components/Title/Title'
 import CategoryService from '../../service/CategoryService'
 import {useContext} from 'react'
 import { ShopContext } from '../../ApplicationContext'
+import ImagePreview from '../../components/ImagePreview/ImagePreview'
 
 const FormCategory = () => {
     const {id} = useParams()
@@ -37,7 +38,7 @@ const FormCategory = () => {
                     CategoryService.findAllCategories().then(value => setNavCategories(value))
                     navigate('/categories')
                 }}>
-                    {({setFieldValue}) => (
+                    {({values, setFieldValue}) => (
                         <Form className='px-5'>
                             <div className='row mb-2 g-3 align-items-center'>
                                 <div className='col-3'>
@@ -57,10 +58,10 @@ const FormCategory = () => {
                                 <div className='col-6'>
                                     <input type="file" name="file"  className='form-control' onChange={(e) => {
                                         setFieldValue('file', e.currentTarget.files[0])
-                                        
                                     }}/>
                                 </div>
                             </div>
+                            <ImagePreview file={values.file} />
                             <button className="btn btn-primary" type="submit">{id !== undefined ? "Update" : "Save"}</button>
                         </Form>
                     )}
