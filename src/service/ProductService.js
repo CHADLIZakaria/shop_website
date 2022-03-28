@@ -2,8 +2,8 @@ import axios from "axios";
 import CategoryService from "./CategoryService";
 
 class ProductService {
-    findAll() {
-        return axios.get('http://localhost:8080/api/products').then(value => value.data).catch(e => console.log(e))
+    findAll(page) {
+        return axios.get(`http://localhost:8080/api/products?page=${page}`).then(value => value.data).catch(e => console.log(e))
     }
 
     findById(id) {

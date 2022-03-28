@@ -7,16 +7,19 @@ import Table from '../../components/Table/Table'
 import Title from '../../components/Title/Title'
 import ProductService from '../../service/ProductService'
 import Progress from '../../components/Progress/Porgress'
+import Pagination from '../../components/Pagination/Pagination'
 
 const Products = () => {
     const [products, setProducts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    useEffect(() => {
-        ProductService.findAll().then(data => 
-            {
-                setProducts(data.data.results)
-                setIsLoading(false)
+    const [paginate, setPaginate] = useState({page: 1})
 
+    useEffect(() => {
+        ProductService.findAll(paginate.page).then(value => 
+            {
+                setProducts(value.data.results)
+                setPaginate({...paginate, totalElements: value.data.totalElements, totalPages: value.data.totalPages})
+                setIsLoading(false)
             })
     }, [isLoading])
 
@@ -54,7 +57,8 @@ const Products = () => {
                     <Progress />
                     : 
                     products.length !== 0 ?
-                        <Table data={products} /> :
+                        <Table data={products} />
+                        :
                         <DataNotFound />    
             }  
         </div>

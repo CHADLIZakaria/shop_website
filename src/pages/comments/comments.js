@@ -19,7 +19,6 @@ const Comments = () => {
             setComments(value.data.results)
             setPaginate({...paginate, totalElements: value.data.totalElements, totalPages: value.data.totalPages})
             setIsLoading(false)
-
         })
     }, [paginate.page])
 
@@ -64,7 +63,8 @@ const Comments = () => {
                         <Pagination paginate={paginate} onClick={onNavigate}/>
                     </> :
                     <DataNotFound />    
-            }  
+            }
+              
           
         </div>
     )

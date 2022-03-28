@@ -13,28 +13,30 @@ import Products from './pages/products/products';
 import Users from './pages/users/users';
 import { ShopProvider } from './ApplicationContext';
 import Navbar from './components/Navbar/Navbar';
+import Login from './pages/Login/Login';
 
 
 function App() {
   return (
-    <Router>
-        <ShopProvider>
-          <Layout>
-                <Routes>
-                  <Route path="/"  exact element={<Home />} />
-                  <Route path="/categories" element={<Categories />} />
-                  <Route path="/category/:id/edit" element={<FormCategory />} />
-                  <Route path="/category/save" element={<FormCategory />} />
-                  <Route path="categories/:name" element={<ListProducts />} key={window.location.pathname} />
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/comments" element={<Comments />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/product/:id" element={<Product />} />
-                  <Route path="/products/save" element={<FormProduct />} />
-                </Routes>
-          </Layout>
-        </ShopProvider>
-    </Router>
+    // <Router>
+    //     <ShopProvider>
+    //       <Layout>
+    //             <Routes>
+    //               <Route path="/"  exact element={<Home />} />
+    //               <Route path="/categories" element={<Categories />} />
+    //               <Route path="/category/:id/edit" element={<FormCategory />} />
+    //               <Route path="/category/save" element={<FormCategory />} />
+    //               <Route path="categories/:name" element={<ListProducts />} key={window.location.pathname} />
+    //               <Route path="/users" element={<Users />} />
+    //               <Route path="/comments" element={<Comments />} />
+    //               <Route path="/products" element={<Products />} />
+    //               <Route path="/product/:id" element={<Product />} />
+    //               <Route path="/products/save" element={<FormProduct />} />
+    //             </Routes>
+    //       </Layout>
+    //     </ShopProvider>
+    // </Router>
+    <Login />
   );
 }
 
